@@ -37,6 +37,9 @@ const reducers = {
             return matchesName || matchesBinomialName;
         };
         state.filteredProducts = state.products.filter(byNames);
+    },
+    resetProduct: (state) => {
+        state.product = null;
     }
 };
 
@@ -58,7 +61,7 @@ export const productSlice = createSlice({
     extraReducers
 });
 
-export const { filterProducts } = productSlice.actions;
+export const { filterProducts, resetProduct } = productSlice.actions;
 
 export const selectFilteredProducts = state => state.product.filteredProducts;
 export const selectProduct = state => state.product.product;
