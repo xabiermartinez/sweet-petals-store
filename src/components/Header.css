@@ -1,0 +1,22 @@
+.header {
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+.header a {
+    color: black;
+    text-decoration: none;
+}
+
+.header a:hover {
+    opacity: .6;
+}
+
+.header .title {
+    display: flex;
+    align-items: center;
+}
+
+.header .breadcrumbs {
+    margin-top: 1em;
+}
