@@ -3,10 +3,11 @@ import "./Products.css";
 import { Col, Container, Row } from "react-grid-system";
 import Item from "../components/Item";
 import { useDispatch, useSelector } from "react-redux";
-import { selectProducts, getProductsAsync } from "../features/product/productSlice";
+import { selectFilteredProducts, getProductsAsync } from "../features/product/productSlice";
+import Search from "../components/Search";
 
 function Products () {
-    const products = useSelector(selectProducts);
+    const filteredProducts = useSelector(selectFilteredProducts);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -16,13 +17,13 @@ function Products () {
     return (
         <Container fluid className="products">
             <Row>
-                <Col xs={12} sm={4} offset={{ xs: 0, sm: 8 }} className="search">
-                    <input type="text" placeholder="search products" />
+                <Col xs={12} sm={4} offset={{ xs: 0, sm: 8 }}>
+                    <Search />
                 </Col>
             </Row>
-            {products && products.length > 0 &&
+            {filteredProducts && filteredProducts.length > 0 &&
                 <Row className="list">
-                    {products.map(product =>
+                    {filteredProducts.map(product =>
                         <Col sm={3} key={product.id}>
                             <Item
                                 id={product.id}
