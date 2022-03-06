@@ -2,12 +2,13 @@ import React from "react";
 import PropTypes from "prop-types";
 import "./Item.css";
 import { Link } from "react-router-dom";
+import Image from "./Image";
 
 function Item ({ id, imgUrl, name, binomialName, price }) {
     return (
         <Link to={`/products/${id}`} className="item">
-            <div className="image">
-                <img src={imgUrl} />
+            <div className="item-image">
+                <Image src={imgUrl} alt={name} />
             </div>
             <p>{name}</p>
             <p><i>{binomialName}</i></p>
