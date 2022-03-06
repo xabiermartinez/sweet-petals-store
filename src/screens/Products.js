@@ -3,7 +3,7 @@ import "./Products.css";
 import { Col, Container, Row } from "react-grid-system";
 import Item from "../components/Item";
 import { useDispatch, useSelector } from "react-redux";
-import { selectFilteredProducts, getProductsAsync } from "../features/product/productSlice";
+import { selectFilteredProducts, getProductsAsync, resetProduct } from "../features/product/productSlice";
 import Search from "../components/Search";
 
 function Products () {
@@ -12,6 +12,7 @@ function Products () {
 
     useEffect(() => {
         dispatch(getProductsAsync());
+        dispatch(resetProduct());
     }, []);
 
     return (
