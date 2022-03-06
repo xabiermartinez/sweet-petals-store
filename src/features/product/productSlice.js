@@ -24,15 +24,27 @@ export const getProductAsync = createAsyncThunk("products/fetchProduct", async i
 
 const initialState = {
     products: [],
+    filteredProducts: [],
     product: null
 };
 
-const reducers = {};
+const reducers = {
+    filterProducts: (state, action) => {
+        const byNames = product => {
+            const matchesName = product.name.toLowerCase().includes(action.payload.toLowerCase());
+            const matchesBinomialName = product.binomialName.toLowerCase().includes(action.payload.toLowerCase());
+
+            return matchesName || matchesBinomialName;
+        };
+        state.filteredProducts = state.products.filter(byNames);
+    }
+};
 
 const extraReducers = builder => {
     builder
         .addCase(getProductsAsync.fulfilled, (state, action) => {
             state.products = action.payload;
+            state.filteredProducts = action.payload;
         })
         .addCase(getProductAsync.fulfilled, (state, action) => {
             state.product = action.payload;
@@ -46,7 +58,9 @@ export const productSlice = createSlice({
     extraReducers
 });
 
-export const selectProducts = state => state.product.products;
+export const { filterProducts } = productSlice.actions;
+
+export const selectProducts = state => state.product.filteredProducts;
 export const selectProduct = state => state.product.product;
 
 export default productSlice.reducer;
